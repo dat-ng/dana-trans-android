@@ -1,0 +1,35 @@
+apply from: 'buildsystem/dependencies.gradle'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'me.tatarka:gradle-retrolambda:3.4.0'
+        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
+        classpath 'com.google.gms:google-services:3.0.0'
+    }
+
+    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
+}
+
+allprojects {
+    ext {
+        androidDevelopApplicationId = 'net.devhack.danatrans.dev'
+        androidProductionApplicationId = 'net.devhack.danntatrans'
+        androidDefaultVersionCode = 1
+        androidDefaultVersionName = "1.0"
+        testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    repositories {
+        jcenter()
+    }
+
+    apply plugin: 'me.tatarka.retrolambda'
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
