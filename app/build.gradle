@@ -1,0 +1,109 @@
+apply plugin: 'com.android.application'
+
+android {
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
+    buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
+
+    defaultConfig {
+        minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
+        targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
+
+        versionCode globalConfiguration.getAt("androidDefaultVersionCode")
+        versionName globalConfiguration.getAt("androidDefaultVersionName")
+        testInstrumentationRunner globalConfiguration.getAt("testInstrumentationRunner")
+    }
+
+    compileOptions {
+        //Use lambdas and RetroLambda
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    productFlavors {
+        develop {
+            applicationId globalConfiguration.getAt("androidDevelopApplicationId")
+            manifestPlaceholders = [hostApplicationId: applicationId,
+                                    appName     : "Dana Trans (Dev)"]
+            dexOptions {
+                //preDexLibraries = false
+                javaMaxHeapSize "4g"
+            }
+
+            lintOptions {
+                abortOnError false
+            }
+        }
+
+        production {
+            applicationId globalConfiguration.getAt("androidProductionApplicationId")
+
+            dexOptions {
+                //preDexLibraries = false
+                javaMaxHeapSize "4g"
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            multiDexEnabled true
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def testDependencies = rootProject.ext.testDependencies
+    def androidTestDependencies = rootProject.ext.androidTestDependencies
+
+    annotationProcessor appDependencies.butterKnifeCompiler
+    annotationProcessor appDependencies.daggerCompiler
+
+    compile appDependencies.multidex
+    compile appDependencies.appCompat
+    compile appDependencies.cardView
+    compile appDependencies.design
+    compile appDependencies.butterKnife
+    compile appDependencies.dagger
+    compile appDependencies.playServicesLocation
+    compile appDependencies.playServicesMaps
+    compile appDependencies.playServicesVision
+    compile appDependencies.stream
+    compile appDependencies.rxAndroid
+    compile appDependencies.rxJava
+    compile appDependencies.hockeyApp
+    compile appDependencies.glide
+    compile appDependencies.countryPicker
+    compile appDependencies.eventBus
+    compile appDependencies.firebaseCore
+    compile appDependencies.firebaseMessaging
+    testCompile testDependencies.junit
+
+    androidTestCompile androidTestDependencies.annotations
+}
+
+apply plugin: 'com.google.gms.google-services'
