@@ -24,6 +24,8 @@ ext {
     retrofitVersion = '1.9.0'
     gsonVersion = '2.7'
     eventBusVersion = '3.0.0'
+    mapboxSdkVersion = '4.2.0@aar'
+    mapboxServiceVersion = '1.3.1@aar'
 
     //Testing
     junitVersion = '4.12'
@@ -50,7 +52,9 @@ ext {
             gson                : "com.google.code.gson:gson:${gsonVersion}",
             eventBus            : "org.greenrobot:eventbus:${eventBusVersion}",
             firebaseCore        : "com.google.firebase:firebase-core:${playServicesVersion}",
-            firebaseMessaging   : "com.google.firebase:firebase-messaging:${playServicesVersion}"
+            firebaseMessaging   : "com.google.firebase:firebase-messaging:${playServicesVersion}",
+            mapboxSDK           : "com.mapbox.mapboxsdk:mapbox-android-sdk:${mapboxSdkVersion}",
+            mapboxService       : "com.mapbox.mapboxsdk:mapbox-android-services:${mapboxServiceVersion}"
     ]
 
     testDependencies = [

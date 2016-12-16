@@ -48,21 +48,22 @@ public class SplashPresenter implements IPresenter {
     }
 
     private void navigate() {
-//        this.postExecutionThread.main(() -> {
+        this.postExecutionThread.main(() -> {
 //            if (danaTransSettings.isFirstTime()) {
 //                navigator.navigateToOnboarding(activity);
 //            } else {
-////                if (sojoRegistration.isProfileCreated()) {
-////                    if (locationHelper.isLocationPermissionGranted()) {
-////                        this.navigator.navigateToHome(this.activity);
-////                    } else {
-////                        this.navigator.navigateToPermissionChecking(this.activity);
-////                    }
-////                } else {
-////                    this.navigator.navigateToRegister(this.activity);
-////                }
+//                if (sojoRegistration.isProfileCreated()) {
+//                    if (locationHelper.isLocationPermissionGranted()) {
+//                        this.navigator.navigateToHome(this.activity);
+//                    } else {
+//                        this.navigator.navigateToPermissionChecking(this.activity);
+//                    }
+//                } else {
+//                    this.navigator.navigateToRegister(this.activity);
+//                }
 //            }
-//            this.activity.finish();
-//        }, SPLASH_DISPLAY_LENGTH);
+            navigator.navigateToHome(activity);
+            this.activity.finish();
+        }, SPLASH_DISPLAY_LENGTH);
     }
 }

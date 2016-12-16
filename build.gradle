@@ -25,6 +25,7 @@ allprojects {
 
     repositories {
         jcenter()
+        mavenCentral()
     }
 
     apply plugin: 'me.tatarka.retrolambda'

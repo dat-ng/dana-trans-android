@@ -24,6 +24,7 @@ android {
     productFlavors {
         develop {
             applicationId globalConfiguration.getAt("androidDevelopApplicationId")
+            buildConfigField 'String', 'MAPBOX_TOKEN', '"pk.eyJ1IjoiZGF0bmd1eWVuZGV2IiwiYSI6ImNpd29sNjZqNTAwMTgyc3FiN3ZicXJqaXQifQ.OsAxUcDxJxpTGfL55phYcQ"'
             manifestPlaceholders = [hostApplicationId: applicationId,
                                     appName     : "Dana Trans (Dev)"]
             dexOptions {
@@ -38,7 +39,7 @@ android {
 
         production {
             applicationId globalConfiguration.getAt("androidProductionApplicationId")
-
+            buildConfigField 'String', 'MAPBOX_TOKEN', '"pk.eyJ1IjoiZGF0bmd1eWVuZGV2IiwiYSI6ImNpd29sNjZqNTAwMTgyc3FiN3ZicXJqaXQifQ.OsAxUcDxJxpTGfL55phYcQ"'
             dexOptions {
                 //preDexLibraries = false
                 javaMaxHeapSize "4g"
@@ -102,6 +103,14 @@ dependencies {
     compile appDependencies.firebaseCore
     compile appDependencies.firebaseMessaging
     testCompile testDependencies.junit
+
+    compile (appDependencies.mapboxSDK){
+        transitive=true
+    }
+
+    compile (appDependencies.mapboxService){
+        transitive=true
+    }
 
     androidTestCompile androidTestDependencies.annotations
 }
